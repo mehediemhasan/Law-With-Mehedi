@@ -21,11 +21,5 @@ export async function onRequestPost({ request, env }) {
       html: `<p><b>Name:</b> ${esc(name)}</p><p><b>Contact:</b> ${esc(contact)}</p><p><b>Topic:</b> ${esc(topic)}</p><p>${esc(message).replace(/\n/g, '<br>')}</p>`
     })
   });
-  if (!r.ok) {
-  const errorDetails = await r.text();
-  console.error("Resend Error:", r.status, errorDetails);
-  return j({ error: "mail failed", status: r.status }, 502);
-}
-
-return j({ ok: true });
+  return r.ok ? j({ ok: true }) : j({ error: 'mail failed' }, 502);
 }
