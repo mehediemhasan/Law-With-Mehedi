@@ -1,1 +1,180 @@
-
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b17">
+<meta name="description" content="Advocate Quest: a free Bangla MCQ game for Bangladesh Bar Council Exam preparation, with past-year questions, explanations and timed trials."><title>Advocate Quest — The Road to Becoming an Advocate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b17;--card:#101a36;--line:#26345c;--gold:#c9a24b;--iv:#f4ecd8;--wine:#7a1f2b;--ok:#4caf7d;--bad:#e0596a;--mut:#9aa4bf}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -10%,#1b2c5e 0,var(--bg) 62%) fixed;color:var(--iv);font-family:"Hind Siliguri",system-ui,sans-serif;line-height:1.55;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);min-height:100vh}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(7,11,23,.8);position:sticky;top:0;z-index:5;backdrop-filter:blur(6px)}
+.logo{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;letter-spacing:.14em;color:var(--gold);text-decoration:none;font-size:19px}
+.tr{display:flex;gap:8px;align-items:center}
+.chip{font-size:12px;border:1px solid var(--gold);color:var(--gold);border-radius:20px;padding:2px 10px}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 60px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;margin:0 0 6px}
+h1{font-size:40px;line-height:1.1}h2{font-size:28px}
+.mut{color:var(--mut)}.gold{color:var(--gold)}
+.card{background:linear-gradient(180deg,#14214a,var(--card));border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+button{font:inherit;color:inherit;cursor:pointer;border:1px solid var(--line);background:#16224a;border-radius:12px;padding:12px 14px;transition:.15s}
+button:hover:not(:disabled){border-color:var(--gold);transform:translateY(-1px)}
+button:disabled{opacity:.45;cursor:default}
+.pri{background:linear-gradient(180deg,#d9b55e,#b48a30);color:#1a1405;border-color:#d9b55e;font-weight:600}
+.ic{padding:4px 10px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 150px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.st{background:#0c1430;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.st b{display:block;font:700 26px "Cormorant Garamond",serif;color:var(--gold)}.st small{color:var(--mut);font-size:12px}
+.bar{height:8px;background:#0a1128;border-radius:8px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:linear-gradient(90deg,#8a6a22,var(--gold));transition:width .6s}
+.cour{width:100%;max-height:200px;margin:6px 0}
+.door{text-align:left;border-radius:60px 60px 12px 12px/34px 34px 12px 12px;padding:18px 14px 14px;background:linear-gradient(180deg,#1a2a5a,#0e1738);border:1px solid var(--gold)}
+.door .em{font-size:30px}.door h3{font-size:21px;color:var(--gold)}
+.q{font-size:20px;font-weight:500;margin:8px 0 14px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px}
+.opt.ok{border-color:var(--ok);background:rgba(76,175,125,.18)}.opt.bad{border-color:var(--bad);background:rgba(224,89,106,.18)}
+.opt.sel{border-color:var(--gold);background:rgba(201,162,75,.16)}
+.exp{border-left:3px solid var(--gold);background:#0c1430;padding:8px 12px;border-radius:0 10px 10px 0;margin:10px 0}
+.hud{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--mut);font-size:14px}
+.tm{color:var(--gold);font-weight:600;font-size:18px}
+.nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px}
+.nav button{padding:6px 0;font-size:13px}.nav .an{background:#3a2f12;border-color:var(--gold)}.nav .mk{background:var(--wine)}.nav .cu{outline:2px solid var(--iv)}
+.toast{position:fixed;left:50%;top:70px;transform:translateX(-50%);background:var(--gold);color:#1a1405;padding:10px 18px;border-radius:30px;font-weight:600;z-index:20;animation:pop 2.6s forwards}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-10px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+.pt{position:fixed;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.35;animation:fl 14s linear infinite;pointer-events:none}
+@keyframes fl{from{transform:translateY(105vh)}to{transform:translateY(-10vh)}}
+@media(prefers-reduced-motion:reduce){.pt{display:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+<span class="pt" style="left:12%;animation-delay:0s"></span><span class="pt" style="left:34%;animation-delay:-5s"></span><span class="pt" style="left:58%;animation-delay:-9s"></span><span class="pt" style="left:81%;animation-delay:-3s"></span>
+<div id="app"></div>
+<script src="questions.js"></script>
+<script>
+(function(){
+/* ===== CONFIG (edit here until the admin panel exists) ===== */
+var CFG={guestLimit:30,previewUnlock:true,perQ:30,taSecs:60,
+ exam:{minutes:60,dist:{cpc:20,sra:10,crpc:20,penal:20,evidence:15,limitation:10,bco:3,ethics:2}},
+ xp:{base:10,comboStep:2,comboMax:5,exam:50,level:25,quest:30},
+ ranks:[["Law Graduate",0],["Junior Law Apprentice",300],["Legal Researcher",900],["Senior Law Apprentice",2000],["Bar Council Champion",4000]]};
+var CH=[
+{k:"cpc",n:"CPC Chamber",en:"Code of Civil Procedure, 1908",s:["Civil Procedure Code"],w:20,i:"📜"},
+{k:"sra",n:"Specific Relief Chamber",en:"Specific Relief Act, 1877",s:["Specific Relief Act"],w:10,i:"⚖️"},
+{k:"crpc",n:"CrPC Chamber",en:"Code of Criminal Procedure, 1898",s:["Criminal Procedure Code"],w:20,i:"🔨"},
+{k:"penal",n:"Penal Code Chamber",en:"The Penal Code, 1860",s:["Penal Code"],w:20,i:"🗡️"},
+{k:"evidence",n:"Evidence Chamber",en:"The Evidence Act, 1872",s:["Evidence Act"],w:15,i:"🔍"},
+{k:"limitation",n:"Limitation Chamber",en:"The Limitation Act, 1908",s:["Limitation Act"],w:10,i:"⏳"},
+{k:"bco",n:"Bar Council Order & Rules Chamber",en:"Bar Council Order & Rules",s:["Bar Council Order"],w:0,i:"🏛️"},
+{k:"ethics",n:"Professional Ethics Chamber",en:"Canons of Professional Conduct & Etiquette",s:["Bar Council Code of Conduct"],w:0,i:"🤝"}];
+var Q=window.QUESTIONS||[];
+function chOf(q){for(var i=0;i<CH.length;i++)if(CH[i].s.indexOf(q.subject)>-1)return CH[i]}
+function pool(c){return Q.filter(function(q){return c.s.indexOf(q.subject)>-1})}
+/* ===== state (browser-only; see setup notes for the server-side version) ===== */
+var KEY="aq_v1",EK="aq_exam";
+function def(){return{name:"Player",welcomed:0,guest:true,gq:0,xp:0,ans:0,cor:0,sub:{},lv:{},ok:{},ex:[],st:0,last:"",day:{},cl:{}}}
+var S=(function(){var d=def();try{return Object.assign(d,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){return d}})();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var $=function(s){return document.querySelector(s)},app=$("#app"),timers=[],snd=false,ac;
+function E(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!==undefined)n.textContent=x;return n}
+function B(x,c,f){var b=E("button",c,x);b.onclick=f;return b}
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function today(){return new Date().toISOString().slice(0,10)}
+function tone(f,d,t){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();var o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.type=t||"sine";g.gain.value=.05;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+function toast(x){var t=E("div","toast",x);document.body.appendChild(t);setTimeout(function(){t.remove()},2700)}
+function rkI(x){var r=0;CFG.ranks.forEach(function(a,i){if(x>=a[1])r=i});return r}
+function addXp(n){var a=rkI(S.xp);S.xp+=n;if(rkI(S.xp)>a){toast("RANK UP: "+CFG.ranks[rkI(S.xp)][0]);tone(660,.35)}save()}
+function rec(q,ok){var c=chOf(q),k=c?c.k:"x",b=S.sub[k]=S.sub[k]||{a:0,c:0},d=today();S.ans++;b.a++;if(ok){S.cor++;b.c++;S.ok[q.id]=1}
+ if(S.last!==d){var y=new Date(Date.now()-864e5).toISOString().slice(0,10);S.st=S.last===y?S.st+1:1;S.last=d}
+ if(S.day.d!==d)S.day={d:d,n:0,ks:{}};S.day.n++;S.day.ks[k]=1;if(S.guest)S.gq++}
+function gated(){return S.guest&&S.gq>=CFG.guestLimit}
+function stop(){timers.forEach(clearInterval);timers=[]}
+function top(){var h=E("header","top"),l=E("a","logo","⚖ ADVOCATE QUEST");l.href="#";l.onclick=function(e){e.preventDefault();home()};var r=E("div","tr");var bk=E("a","chip","← Law with Mehedi");bk.href="../";bk.style.textDecoration="none";r.appendChild(bk);
+ r.appendChild(E("span","chip",CFG.ranks[rkI(S.xp)][0]+" · "+S.xp+" XP"));r.appendChild(B(snd?"🔊":"🔇","ic",function(){snd=!snd;this.textContent=snd?"🔊":"🔇";tone(520,.1)}));h.appendChild(l);h.appendChild(r);return h}
+function view(){stop();app.innerHTML="";app.appendChild(top());var w=E("main","wrap");for(var i=0;i<arguments.length;i++)w.appendChild(arguments[i]);app.appendChild(w);window.scrollTo(0,0)}
+function card(){var c=E("section","card");for(var i=0;i<arguments.length;i++)c.appendChild(arguments[i]);return c}
+function bar(p){var b=E("div","bar"),i=E("i");i.style.width=Math.max(0,Math.min(100,p))+"%";b.appendChild(i);return b}
+function stat(v,l){var d=E("div","st");d.appendChild(E("b","",v));d.appendChild(E("small","",l));return d}
+/* ===== welcome / gates / setup ===== */
+function welcome(){var c=card(E("h1","","ADVOCATE QUEST"),E("p","gold","The Road to Becoming an Advocate"),E("p","mut","Bangladesh Bar Council Lower Court Preliminary (MCQ). Enter the courthouse, master eight legal chambers, then face the Final Trial: 100 questions in 60 minutes."));
+ var r=E("div","row");r.appendChild(B("Start Playing as Guest","pri",function(){S.welcomed=1;save();home()}));r.appendChild(B("Create an Account / Login","",setup));c.appendChild(r);view(c)}
+function setup(){var c=card(E("h2","","Account & online features need a backend"),E("p","mut","This build runs entirely in your browser, so the following are not active yet. There are no fake buttons: each needs real service configuration."));
+ ["Google login: Google OAuth client ID/secret + redirect URL on your site.","Facebook login: Meta app ID/secret + redirect URL.","Email OTP: an email provider connected to Supabase Auth (or similar).","Saved progress, leaderboards, daily quests: a database (e.g. Supabase) with server-side XP/score calculation.","1v1 Multiplayer: Supabase Realtime (or similar) with server-synced questions and scores.","Admin panel & Excel/CSV import: authenticated admin role and database tables.","Server-side guest limits and anti-cheat: Row Level Security and server functions. Until then, XP and limits live in your browser and can be edited by a determined user."].forEach(function(x){c.appendChild(E("p","","• "+x))});
+ c.appendChild(B("Back","",home));view(c)}
+function gate(){var c=card(E("h2","gold","YOUR LEGAL JOURNEY HAS JUST BEGUN!"),E("p","","Create your free account to unlock the full Advocate Quest experience."),E("p","mut","Save your progress. Master every legal subject. Challenge other aspiring advocates. Become a Bar Council Champion."));
+ ["Continue with Google","Continue with Facebook","Register with Email"].forEach(function(x){c.appendChild(B(x,"opt",setup))});
+ if(CFG.previewUnlock)c.appendChild(B("Continue in local preview (accounts not connected yet)","",function(){S.guest=false;save();home()}));c.appendChild(B("Back","",home));view(c)}
+/* ===== readiness (official marks weighting) ===== */
+function readiness(){var t=0;CH.forEach(function(c){if(c.w){var b=S.sub[c.k];t+=c.w*(b&&b.a?b.c/b.a:0)}});var a=0,k=0;["bco","ethics"].forEach(function(x){var b=S.sub[x];if(b){a+=b.a;k+=b.c}});t+=5*(a?k/a:0);return Math.round(t)}
+function acc(k){var b=S.sub[k];return b&&b.a?Math.round(b.c/b.a*100):null}
+/* ===== home / courthouse ===== */
+function home(){if(!S.welcomed)return welcome();
+ var ri=rkI(S.xp),cur=CFG.ranks[ri][1],nx=CFG.ranks[ri+1],pct=nx?(S.xp-cur)/(nx[1]-cur)*100:100;
+ var nm=B(S.name,"ic",function(){var n=prompt("Player name",S.name);if(n){S.name=n.slice(0,24);save();home()}});
+ var p=card(E("h2","",""),E("p","gold",CFG.ranks[ri][0]+" · Level "+(Math.floor(S.xp/100)+1)),bar(pct),E("small","mut",nx?S.xp+" / "+nx[1]+" XP to "+nx[0]:"Highest rank achieved"));p.firstChild.appendChild(document.createTextNode("Welcome, "));p.firstChild.appendChild(nm);
+ if(S.guest)p.appendChild(E("p","mut","Guest: "+Math.max(0,CFG.guestLimit-S.gq)+" of "+CFG.guestLimit+" free questions left."));
+ var st=E("div","stats");var bs=S.ex.length?Math.max.apply(null,S.ex.map(function(e){return e.m})):0;
+ [[S.ans,"Answered"],[S.cor,"Correct"],[S.ans-S.cor,"Incorrect"],[(S.ans?Math.round(S.cor/S.ans*100):0)+"%","Accuracy"],[S.ex.length,"Final Trials"],[bs+"/100","Best Trial"],[S.st,"Day streak"],[readiness()+"%","Readiness"]].forEach(function(x){st.appendChild(stat(x[0],x[1]))});
+ var rd=E("small","mut","Readiness is weighted by official marks (CPC 20, SRA 10, CrPC 20, Penal 20, Evidence 15, Limitation 10, Bar Council/Ethics 5). It is not a prediction of passing.");
+ var modes=E("div","row");modes.appendChild(B("⚔️ Quick Battle","pri",function(){quick(null)}));modes.appendChild(B("⏱️ Time Attack","",function(){timeAttack()}));modes.appendChild(B("🏛️ Bar Council Final Trial","pri",trialStart));modes.appendChild(B("🤺 Multiplayer Arena","",setup));modes.appendChild(B("🏆 Leaderboard","",setup));
+ if(localStorage.getItem(EK)&&!JSON.parse(localStorage.getItem(EK)).done)modes.insertBefore(B("▶ Resume Final Trial","pri",function(){trial(JSON.parse(localStorage.getItem(EK)))}),modes.firstChild);
+ var d=S.day.d===today()?S.day:{n:0,ks:{}},nk=Object.keys(d.ks||{}).length,qs=E("div","card");qs.appendChild(E("h3","","Daily Legal Quests"));
+ [["q1","Answer 10 questions today",d.n>=10,d.n+"/10"],["q2","Practise 3 different chambers",nk>=3,nk+"/3"]].forEach(function(q){var key=today()+q[0],r=E("div","row");r.appendChild(E("span","",q[1]+" ("+q[3]+")"));r.appendChild(B(S.cl[key]?"Claimed ✓":"Claim +"+CFG.xp.quest+" XP","",function(){if(S.cl[key]||!q[2])return;S.cl[key]=1;addXp(CFG.xp.quest);home()}));r.lastChild.disabled=!!S.cl[key]||!q[2];qs.appendChild(r)});
+ qs.appendChild(E("small","mut","Browser-only rewards; backend validation is part of the online setup."));
+ var svg='<svg class="cour" viewBox="0 0 800 190"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c677"/><stop offset="1" stop-color="#8a6a22"/></linearGradient></defs><polygon points="50,72 400,12 750,72" fill="#0e1738" stroke="url(#g)" stroke-width="3"/><text x="400" y="55" text-anchor="middle" fill="#c9a24b" font-size="22" font-family="Georgia" letter-spacing="6">SUPREME COURTHOUSE</text><rect x="50" y="72" width="700" height="14" fill="url(#g)"/>'+[0,1,2,3,4,5,6].map(function(i){return '<rect x="'+(90+i*95)+'" y="90" width="30" height="70" rx="4" fill="#d9c9a0" opacity=".85"/>'}).join("")+'<rect x="40" y="160" width="720" height="10" fill="#8a6a22"/><rect x="25" y="170" width="750" height="12" fill="#5a4617"/></svg>';
+ var ct=E("section","card");ct.innerHTML=svg;ct.appendChild(E("h3","","Choose a Chamber"));var g=E("div","grid");
+ CH.forEach(function(c){var n=pool(c).length,done=pool(c).filter(function(q){return S.ok[q.id]}).length,lv=(S.lv[c.k]||[]).filter(function(x){return x>=60}).length,a=acc(c.k),dr=E("button","door");
+  dr.appendChild(E("div","em",c.i));dr.appendChild(E("h3","",c.n));dr.appendChild(E("small","mut",c.en));dr.appendChild(bar(n?done/n*100:0));dr.appendChild(E("small","",n+" questions · "+(n?Math.round(done/n*100):0)+"% cleared · Levels "+lv+"/5 · Accuracy "+(a===null?"–":a+"%")));dr.onclick=function(){chamber(c)};g.appendChild(dr)});ct.appendChild(g);
+ var an=E("section","card");an.appendChild(E("h3","","Subject performance"));CH.forEach(function(c){var a=acc(c.k);an.appendChild(E("small","mut",c.n+" — "+(a===null?"no data yet":a+"% accuracy")));an.appendChild(bar(a||0))});
+ view(p,card(st,rd),card(modes),qs,ct,an)}
+/* ===== battle engine (Quick Battle, Campaign, Time Attack) ===== */
+function battle(o){var i=0,ok=0,combo=0,bestC=0,xp=0,t0,dl,total=0,qs=o.list;
+ function end(){stop();var a=qs.length?Math.round(ok/Math.max(1,i)*100):0;if(o.done)o.done(ok,i);var c=card(E("h2","gold",o.title+" complete"),E("p","","Score: "+ok+" / "+i+" · Accuracy "+a+"% · XP +"+xp+" · Best combo ×"+bestC+(o.ta?" · Avg "+(i?(total/i/1000).toFixed(1):0)+"s/answer":"")));
+  c.appendChild(B("Play again","pri",o.again));c.appendChild(B("Home","",home));view(c)}
+ function show(){if(gated()){return gate()}if(i>=qs.length)return end();var q=qs[i],lock=false;t0=Date.now();
+  var hud=E("div","hud"),tm=E("span","tm","");hud.appendChild(E("span","","Question "+(i+1)+"/"+qs.length+" · "+q.subject));hud.appendChild(E("span","","XP +"+xp+" · Combo ×"+combo));hud.appendChild(tm);
+  var c=card(hud,E("div","q",q.q)),fb=E("div"),btns=[];
+  q.o.forEach(function(t,k){var b=B("ABCD"[k]+")  "+t,"opt",function(){ans(k)});btns.push(b);c.appendChild(b)});c.appendChild(fb);view(c);
+  if(o.per||!dl)dl=Date.now()+(o.per||o.total)*1000;
+  var tk=setInterval(function(){var r=Math.ceil((dl-Date.now())/1000);tm.textContent="⏱ "+Math.max(0,r)+"s";if(r<=3&&r>0)tone(300,.05);if(r<=0){if(o.per)ans(-1);else{stop();end()}}},250);timers.push(tk);
+  function ans(k){if(lock)return;lock=true;var ms=Date.now()-t0;total+=ms;var good=k===q.a;btns[q.a].classList.add("ok");if(!good&&k>=0)btns[k].classList.add("bad");
+   rec(q,good);if(good){combo++;bestC=Math.max(bestC,combo);ok++;var g=CFG.xp.base+Math.min(combo-1,CFG.xp.comboMax)*CFG.xp.comboStep;if(o.ta)g+=ms<3000?5:ms<6000?3:ms<10000?1:0;xp+=g;addXp(g);tone(740,.15)}else{combo=0;tone(180,.25,"square")}save();i++;
+   if(o.per)clearInterval(tk);if(o.ta){setTimeout(show,700);return}
+   fb.appendChild(E("p","",k<0?"⏱ Time up! Correct: "+"ABCD"[q.a]:good?"✓ Correct!":"✗ Incorrect. Correct: "+"ABCD"[q.a]));if(q.e)fb.appendChild(E("div","exp",q.e));fb.appendChild(B(i>=qs.length?"Finish":"Next →","pri",show))}}
+ show()}
+function quick(c){var l=sh(c?pool(c):Q.filter(chOf)).slice(0,10);battle({title:"Quick Battle",list:l,per:CFG.perQ,again:function(){quick(c)}})}
+function timeAttack(){battle({title:"Time Attack",list:sh(Q.filter(chOf)),total:CFG.taSecs,ta:true,again:timeAttack})}
+function chamber(c){var n=pool(c).length,size=Math.min(10,Math.max(3,Math.ceil(n/5))),lv=S.lv[c.k]=S.lv[c.k]||[];
+ var h=card(E("h2","",c.i+" "+c.n),E("p","gold",c.en),E("p","mut",n+" questions available. Levels are sequential sets from your question bank; difficulty labels will appear once questions are tagged by difficulty."));
+ h.appendChild(B("Quick Battle in this chamber","pri",function(){quick(c)}));
+ var g=E("div","grid");["Beginner","Intermediate","Advanced","Expert","Master Challenge"].forEach(function(nm,i){var qs=pool(c).slice(i*size,(i+1)*size);if(!qs.length)return;var open=i===0||(lv[i-1]||0)>=60,b=B("Level "+(i+1)+" — "+nm+(open?"":" 🔒")+"\n"+qs.length+" questions · Best "+(lv[i]||0)+"%","",function(){battle({title:c.n+" L"+(i+1),list:sh(qs),per:CFG.perQ,again:function(){chamber(c)},done:function(k,m){var p=Math.round(k/Math.max(1,m)*100);if(p>(lv[i]||0))lv[i]=p;if(p>=60)addXp(CFG.xp.level);save()}})});b.style.whiteSpace="pre-line";b.disabled=!open;g.appendChild(b)});
+ view(h,card(E("h3","","Campaign (unlock each level with 60%+)"),g),card(B("← Courthouse","",home)))}
+/* ===== Bar Council Final Trial ===== */
+function trialStart(){if(S.guest)return gate();var d=CFG.exam.dist,ids=[],miss=[];CH.forEach(function(c){var need=d[c.k],p=sh(pool(c)).slice(0,need);if(p.length<need)miss.push(c.n);p.forEach(function(q){ids.push(q.id)})});
+ var c=card(E("h2","gold","THE BAR COUNCIL FINAL TRIAL"),E("p","","100 questions · 100 marks · "+CFG.exam.minutes+" minutes · 1 mark each. Answers are hidden until you submit. Your attempt survives a page refresh and auto-submits when time ends."),E("small","mut","CPC 20 · Specific Relief 10 · CrPC 20 · Penal 20 · Evidence 15 · Limitation 10 · Bar Council Order & Ethics 5 (configurable split: "+d.bco+"+"+d.ethics+")."));
+ if(miss.length||ids.length!==100)c.appendChild(E("p","mut","⚠ Not enough questions for: "+miss.join(", ")+" (paper has "+ids.length+" questions)."));
+ c.appendChild(B("Begin Examination","pri",function(){var e={ids:sh(ids),a:{},m:{},i:0,end:Date.now()+CFG.exam.minutes*60000,start:Date.now(),done:false};localStorage.setItem(EK,JSON.stringify(e));trial(e)}));c.appendChild(B("Back","",home));view(c)}
+function byId(id){for(var i=0;i<Q.length;i++)if(Q[i].id===id)return Q[i]}
+function trial(e){var qs=e.ids.map(byId).filter(Boolean),done=false;function sv(){localStorage.setItem(EK,JSON.stringify(e))}
+ function draw(){if(done)return;var q=qs[e.i],hud=E("div","hud"),tm=E("span","tm","");hud.appendChild(E("span","","Question "+(e.i+1)+"/"+qs.length));hud.appendChild(E("span","","Answered "+Object.keys(e.a).length+" · Marked "+Object.keys(e.m).length));hud.appendChild(tm);
+  var c=card(hud,E("div","q",q.q));q.o.forEach(function(t,k){var b=B("ABCD"[k]+")  "+t,"opt"+(e.a[e.i]===k?" sel":""),function(){e.a[e.i]=k;sv();draw()});c.appendChild(b)});
+  var r=E("div","row");r.appendChild(B("← Previous","",function(){if(e.i>0){e.i--;sv();draw()}}));r.appendChild(B(e.m[e.i]?"Unmark review":"Mark for review","",function(){if(e.m[e.i])delete e.m[e.i];else e.m[e.i]=1;sv();draw()}));r.appendChild(B("Next →","",function(){if(e.i<qs.length-1){e.i++;sv();draw()}}));c.appendChild(r);
+  var g=E("div","nav");qs.forEach(function(x,i){var b=B(String(i+1),(e.a[i]!==undefined?"an ":"")+(e.m[i]?"mk ":"")+(i===e.i?"cu":""),function(){e.i=i;sv();draw()});g.appendChild(b)});
+  var sb=B("Submit Examination","pri",function(){if(confirm("Submit now? Unanswered: "+(qs.length-Object.keys(e.a).length)))submit("manual")});
+  view(c,card(E("small","mut","Navigator: gold = answered, burgundy = marked for review"),g),card(sb));
+  var tk=setInterval(function(){var s=Math.ceil((e.end-Date.now())/1000);tm.textContent="⏱ "+Math.max(0,Math.floor(s/60))+":"+("0"+Math.max(0,s%60)).slice(-2);if(s<=0)submit("auto")},500);timers.push(tk)}
+ function submit(why){if(done||e.done)return;done=true;e.done=true;sv();stop();var cor=0,wr=0,un=0,sub={};qs.forEach(function(q,i){var c=chOf(q),b=sub[c.k]=sub[c.k]||{n:0,c:0};b.n++;var a=e.a[i];if(a===undefined)un++;else{var ok=a===q.a;if(ok){cor++;b.c++}else wr++;rec(q,ok)}});
+  var took=Math.min(Date.now(),e.end)-e.start;S.ex.push({d:today(),m:cor,t:took});addXp(cor*2+CFG.xp.exam);save();
+  var c=card(E("h2","gold",why==="auto"?"Time is up — auto-submitted":"Examination submitted"),E("h1","",cor+" / 100"),E("p","","Correct "+cor+" · Incorrect "+wr+" · Unanswered "+un+" · "+Math.round(cor/qs.length*100)+"% · Time "+Math.floor(took/60000)+"m "+Math.floor(took/1000%60)+"s"),E("small","mut","One mark per correct answer. No negative marking or pass mark is applied or implied."));
+  var sc=card(E("h3","","Subject-wise result"));CH.forEach(function(x){var b=sub[x.k]||{n:0,c:0};sc.appendChild(E("small","mut",x.n+": "+b.c+"/"+b.n+(b.n?" ("+Math.round(b.c/b.n*100)+"%)":"")));sc.appendChild(bar(b.n?b.c/b.n*100:0))});
+  var rv=card(E("h3","","Answer review"));qs.forEach(function(q,i){var a=e.a[i],dt=E("details");var s=E("summary","",(i+1)+". "+(a===undefined?"○ ":a===q.a?"✓ ":"✗ ")+q.q.slice(0,80));dt.appendChild(s);dt.appendChild(E("p","","Your answer: "+(a===undefined?"—":"ABCD"[a]+") "+q.o[a])+" | Correct: "+"ABCD"[q.a]+") "+q.o[q.a]));if(q.e)dt.appendChild(E("div","exp",q.e));dt.appendChild(E("small","mut",q.id));rv.appendChild(dt)});
+  localStorage.removeItem(EK);view(c,sc,card(B("Home","pri",home)),rv)}
+ draw()}
+document.addEventListener("keydown",function(ev){if(/^[1-4]$/.test(ev.key)){var o=document.querySelectorAll(".opt");if(o[ev.key-1])o[ev.key-1].click()}});
+home();
+})();
+</script>
+</body>
+</html>
